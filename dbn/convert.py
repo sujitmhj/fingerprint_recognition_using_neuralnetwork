@@ -32,12 +32,12 @@ def get_formatted_img(file_name):
     height_offset = (size_max - img_croped.shape[0])/2
     width_offset = (size_max - img_croped.shape[1])/2
     blank_image[height_offset:height_offset + img_croped.shape[0],width_offset:width_offset + img_croped.shape[1]] = img_croped
-    final = cv2.resize(blank_image, (5, 5))
+    final = cv2.resize(blank_image, (20, 20))
     # print final_image.shape
     # cv2.imshow('img',final)
     # cv2.waitKey(0)
     return np.ravel(final)
-print "completed"
+
 
 rootdir = '../image_database/'
 nepali = [
@@ -74,3 +74,4 @@ output['label'] = np.array(label_array)
                 
 output['mldata_descr_ordering'] = np.array([[np.array("label"),np.array("data")]],dtype="object")
 sio.savemat("./mnist-original.mat", output)
+print "completed saving image into matrix"

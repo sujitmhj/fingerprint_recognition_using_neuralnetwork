@@ -52,8 +52,9 @@ except:
 
 def get_window_image(img,row,column):
     # print row, row
+    half = 10
     try:
-        img_croped = img[column-2:column+3, row-2:row+3]
+        img_croped = img[column-half:column+half, row-half:row+half]
         created = True
     except:
         created = False
@@ -102,12 +103,13 @@ final = cv2.resize(blank_image, (200, 200))
 print "Searching Minutiae in image"
 
 
-for i in range(2,gray.shape[0]-2):
-    for j in range(2, gray.shape[1]-2):
+for i in range(10,gray.shape[0]-11):
+    for j in range(10, gray.shape[1]-11):
         if gray[i,j] == 255:
             continue
         # print i,j
         created, window_image = get_window_image(gray,j,i)
+        print window_image.shape
 
 
 
@@ -118,6 +120,7 @@ for i in range(2,gray.shape[0]-2):
         # print final.shape
         # print "gone",window_image.shape[1], created
         final_image = np.ravel(window_image)/255
+        print final_image.shape
 
         pred = dbn.predict(np.atleast_2d(final_image))
 
