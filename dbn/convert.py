@@ -36,8 +36,8 @@ def get_formatted_img(file_name):
     # print final_image.shape
     # cv2.imshow('img',final)
     # cv2.waitKey(0)
-    print "completed"
     return np.ravel(final)
+print "completed"
 
 rootdir = '../image_database/'
 nepali = [
@@ -57,10 +57,11 @@ for subdir, dirs, files in os.walk(rootdir):
 
         folder_no = float(mapper[subdir.split("/")[-1].split("-")[0]])
         if ".tif" in file:
+            image_matrix = get_formatted_img(os.path.join(subdir, file))
 
             try:
                 output['data'] = np.column_stack((output['data'],image_matrix))
-                print output["data"]
+                # print output["data"]
             except:
                 output['data'] = image_matrix
             label_array.append(folder_no)
